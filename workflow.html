@@ -1,0 +1,108 @@
+<html>
+<head>
+</head>
+<body>
+	<h1> Requirements </h1>
+	<h1> 1. Workflow </h1>
+	<img src="./workflow.png"></img>
+
+	<h1> 2. Implementation Guide </h1>
+	In playbook folder, you will find different htmls numbered from 1 to 4, there are questionaries that you must read and answer.
+	Each answer will clarify about potential source of bias in your AI algorithm, fairness mesures to take into account in your algorithm and intersectionality
+	considerations to take into account discrimination patters on people satisfying more than one protected attributes.
+	<p> </p>
+
+	<h1> 3. Case Study : Fair Scholarship allowances </h1>
+	<h2> 3.1 Description </h2>
+	<p>The Government of a country want to implement an algorithm to decide automatically who will benefit from a 5 year scholarship allowance.
+	It has 500000 allowances and its duty is to assign them in the most possible fair way. Also taking into account that money must not be wasted and candidates
+	should finish their career.
+	For this task they come to me and my playbook.</p>
+	<h2> 3.2 Applying historical module </h2>
+	<p>The first task to assess fairness in such an algorithm is to feed this problem as input of the Historical Context Module and answer questions :
+	<h3> 3.2.1. Domain and Application Context </h3>
+	<ul><li>
+		q1 : Application Domain Identification. What specific domain will this system operate in (e.g., lending, hiring, healthcare, criminal justice)? What function will it serve within this domain?</li><li>
+		a1 : The application domain is scholarship money assignment. It will serve the function of assign scholarship ressources in the most fair possible way.
+	</li></ul>
+	<ul><li>
+	q2: What documented patterns of discrimination exist in this domain? Consider both explicit policies (e.g., redlining in housing) and implicit practices.
+	</li><li>
+	a2 : It has been shown by statistics than scholarships are assigned to people living in the cities, because universities are also in the cities. It has been also shown that people between 20-35 got the scholarhips, and people above 35 tend to be excluded.
+	</li></ul>
+
+	<h3>3.2.2 Data And Representation Analysis :</h3>
+
+	<h4> 3.2.2.1. Historical Data Sources. </h4>
+	<ul><li>
+	Q) What historical data sources will inform this system? How were these datasets collected, and what historical contexts shaped their collection?</li>
+	<li>A) Data Sources feeding the system will be people that have been choosen for scholaship, with their attributes and a boolean if he could finish or not.</li>
+	</li></ul>
+
+	<h4> 3.2.2.2 Categorical Formation. </h4>
+<ul><li>
+How have relevant categories (e.g., race, gender, creditworthiness) been defined historically in this domain? How have these definitions changed over time?</li>
+<li>During history genders have been only Male and Female, however, some years ago government create a figure "mother head of family" in order to highlight the vulnerability of this population.
+</li></ul>
+<h4> 3.2.2.3 Measurement Approaches. </h4>
+<ul><li>
+How have key variables historically been measured in this domain? Might these measurements encode historical biases?</li><li>
+Measures have been focused in obtained grades, keeping aside other important meassures like quality of the job obtaining after and income. These could evidence a bias
+because students with better ressources could get better grades .</li>
+</ul>
+<h3>3.2.3. Previous Technological Systems. </h3>
+<li>q1. What previous technological systems have served similar functions in this domain? How did these systems perpetuate or challenge existing inequities?</li>
+
+<li>a1. Before, scholarship assignation was done filling a in paper application, followed by a comitte review, decisions were done by voting.These system privilege people in the cities, because was easy for them go physically to fill in papers.</li>
+<li>
+q2. Technological Amplification. How might an automated system potentially amplify existing historical biases compared to previous systems? What new capabilities introduce additional risks?</li>
+<li>a2. Because of the nature of data, we will count with data of people between 20-35, the other age categories will be excluded.</li>
+</ul>
+</p>
+<h2> 3.3. Applying Fairness Definition component</h2>
+	<h3> Step 1 : Has historical context analysis revealed systematic exclusion or under-representation of protected groups? YES.</h3>
+	<p color="red"> We will add demographic parity as a fairness definition </p>
+	<h3> Step 2: Error-Impact Analysis Which error type has greater negative impact in this application? </h3>
+	<p>both error types are equally critical: Make equalized odds a mandatory fairness definition.</p>
+
+<h3>Will the system expose probabilistic scores to users or analysts (e.g., credit-risk scores, insurance pricing, ranking algorithms)?</h3>
+<p>yes: Add sufficiency (group-calibrated scores) to your fairness metric set.</p>
+
+<h2> 3.4 Applying Bias Source component</h2>
+<p> The Bias source detected in the previous sections are : historical, measurement and deployment </p>
+
+<h2>3.5 Applying Fairness Metric Component </h2>
+Problem Type Classification
+Ranking → Go to Step 8
+
+    Exposure Parity → Select: Exposure Ratio, Normalized Discounted Cumulative Gain Difference
+    Representation Parity → Select: Group Representation Ratio, Top-k Proportion Difference
+    Individual Fairness → Select: Rank-Consistency Score, Similar-Item Rank Distance
+
+<h1>4. Validation framework </h1>
+
+<h2> 4.1 Metrics follow up </h2>
+<p> Before and After each algorithm deployment, team must  check the set of metrics defined for fairness, it must be clear that choosen metrics are improving over time. </p>
+<h2> 4.2 Intersectional surveillance </h2>
+<p> Team must check algorithm outputs for people in intersections of two or more protected attributes and should observe and report if discrimination patterns arises</p>
+<h1> 5. Intersectionality (already taken into account in 4 components)</h1>
+<h1> 6. Adaptability guidelines (for using the playbook across different domains (healthcare, finance, etc.) and problem types (classification, regression, etc.))</h1>
+<ul>
+    <li>This playbook is domain independent, and for classification and regression problems , there are specific bulltepoints in the playbook that allow for this customizations </li>
+</ul>
+
+<h1>7. Implementation guidelines addressing practical organizational considerations like time requirements, necessary expertise, and integration with existing development processes.</h1>
+
+<ul>
+    <li> It is always a good idea to count with at least a domain expert. i.e , someone who has been working with the algorithm in the past and can answer question of why this has been done.</li>
+    <li> The final algorithm would be better designed if fairness is a priority since the beginnning, best design means job easy for the team. 
+    This implies that fairness must be included since the data collection step, and team must dedicate some hours on each step of the data science pipeline (data gathering, preprocessing, analysis, visualization ), to ensure a fair product.</li>
+    <li>Is always good to delegate Fairness responsbaility on one team member, and make him accountable for this</li>
+</ul>
+
+<h1>8. Insights on how your playbook could be improved</h1>
+<ul>
+    <li>It could be systematized with a mobile app .</li>
+</ul>
+</body>
+</html>
