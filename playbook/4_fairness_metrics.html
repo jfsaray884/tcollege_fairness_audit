@@ -1,0 +1,106 @@
+<html>
+<head>
+    <style>
+        div{
+            color: green;
+            font-size: 50px;
+            margin: 50px 50px;
+        }
+        body {
+                counter-reset: counter1;
+            }
+            h2 {
+                counter-reset: counter2;
+            }
+            h2:before {
+                counter-increment: counter1;
+                content: "Section " counter(counter1) ". ";
+            }
+            h3:before {
+                counter-increment: counter2;
+                content: counter(counter1) "." counter(counter2) " ";
+            }
+    </style>
+</head>
+<body>
+<h1>Metric Selection</h1>
+    <ol>
+    <li>Problem Type Classification
+        <ul>Classification → Go to Step 2</ul>
+        <ul>Regression → Go to Step 5</ul>
+        <ul>Ranking → Go to Step 8</ul>
+    </li>
+    Note. It seems that steps 2-4 are missing in your colleague's document.
+    <li>
+    Regression: Primary Fairness Definition<ul>
+        <li>Statistical Parity → Select: Group Outcome Difference, Distribution Comparison metrics</li>
+        <li>Bounded Group Loss → Select: Maximum Group Loss, Group Error Ratio</li>
+        <li>Individual Fairness → Select: Individual Consistency Measure, Input-Output Sensitivity</li>
+    </ul>
+    </li>
+    <li>
+        Regression: Error Direction Importance
+        <ul>
+        <li>Overprediction more harmful → Add Positive Residual Difference</li>
+        <li>Underprediction more harmful → Add Negative Residual Difference</li>
+        <li>Both harmful → Add Absolute Residual Difference</li>
+        </ul>
+    </li>
+     <li>
+    Regression: Uncertainty Requirements
+    <ul>
+        <li>Uncertainty estimates provided → Add Prediction Interval Coverage metrics </li>
+        <li> No uncertainty provided → No additional metrics </li>
+    </ul>
+     <li>
+    Ranking: Primary Fairness Definition
+    <ul>
+        <li>Exposure Parity → Select: Exposure Ratio, Normalized Discounted Cumulative Gain Difference</li>
+        <li>Representation Parity → Select: Group Representation Ratio, Top-k Proportion Difference</li>
+        <li>Individual Fairness → Select: Rank-Consistency Score, Similar-Item Rank Distance</li>
+    </ul>
+    </li>
+</ol>
+
+
+<h1>Statistical Validation</h1>
+
+<h2>Bootstrap Confidence Intervals for Group Fairness Metrics</h2>
+<ol>
+    <li>Resample with replacement from original dataset.</li>
+    <li>Calculate fairness metric on each resampled dataset.</li>
+    <li>Determine confidence intervals from the resulting distribution.</li>
+    <li>Report 95% confidence intervals for all metrics.</li>
+</ol>
+<h2>Small Sample Handling</h2>
+<ol>
+    <li>For groups with fewer than 100 samples, use Bayesian approaches with weakly informative priors.</li>
+    <li>Report credible intervals rather than confidence intervals.</li>
+    <li>Explicitly note small sample sizes in visualization and reporting.</li>
+</ol>
+<h1>Visualization and Reporting System</h1>
+
+<h2>Fairness Disparity Chart</h2>
+<ul>
+    <li>Bar chart showing primary metrics across groups with confidence intervals.</li>
+    <li>Color-coding indicating statistical significance.</li>
+    <li>Reference lines for acceptable thresholds.</li>
+</ul>
+<h2>Intersectional Heatmap</h2>
+    <ul>
+    <li>Heatmap showing metric values across all intersectional groups.</li>
+    <li>Color gradient indicating magnitude of disparities.</li>
+    <li>Cell size or opacity indicating sample size.</li>
+    </ul>
+
+<h1> Intersectionality considerations : </h1>
+
+<ul>
+    <li>
+    Extending metrics to examine combinations of protected attributes rather than analyzing each attribute in isolation.</li>
+    <li>Addressing statistical challenges that arise from smaller sample sizes at intersections.</li>
+    <li>Developing visualization approaches that effectively communicate complex intersectional patterns.</li>
+    <li>Creating prioritization frameworks when different intersectional subgroups show conflicting fairness requirements.</li>
+</ul>
+
+<p>For our Fairness Metrics Tool, addressing intersectionality means designing metrics that can analyze multiple protected attributes simultaneously, with appropriate statistical techniques for handling smaller subgroup sizes. </p>
