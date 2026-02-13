@@ -1,0 +1,174 @@
+<html>
+<head>
+    <style>
+        div{
+            color: green;
+            font-size: 50px;
+            margin: 50px 50px;
+        }
+        body {
+                counter-reset: counter1;
+            }
+            h2 {
+                counter-reset: counter2;
+            }
+            h2:before {
+                counter-increment: counter1;
+                content: counter(counter1) ". ";
+            }
+            h3:before {
+                counter-increment: counter2;
+                content: counter(counter1) "." counter(counter2) " ";
+            }
+    </style>
+</head>
+<body>
+<h1>Bias taxonomy</h1>
+<h2>Historical Bias</h2>
+    <ul>
+    <li>Definition: Bias resulting from pre-existing social inequities, regardless of sampling or feature selection.
+    <li>Indicators:<ul>
+        <li>Target variables reflecting historical discrimination.</li>
+        <li>Problematic correlations that mirror societal inequities.</li>
+        <li>Patterns that align with known historical discrimination.</li></ul>
+    <li> Example: A hiring algorithm trained on historical hiring decisions may perpetuate patterns of gender discrimination in technical roles.</li>
+</ul>
+
+<h2>Representation Bias</h2>
+<ul>
+<li>Definition: Bias arising from how populations are sampled and measured in training data.</li>
+    <li>Indicators:</li>
+    <ul>
+        <li>Demographic imbalances compared to target population</li>
+        <li>Quality disparities across demographic groups</li>
+        <li>Systematic measurement differences</li>
+        </ul>
+    <li>Example: A medical diagnostic system trained primarily on data from young adult males may perform poorly for elderly female patients.</li>
+</ul>
+<h2>Measurement Bias</h2>
+<ul>
+<li>Definition: Bias arising from how attributes are measured, proxied, or operationalized.
+<li>Indicators:<ul>
+        <li>Different measurement approaches across groups</li>
+        <li>Proxy variables with varying accuracy across populations</li>
+        <li>Inconsistent label quality across demographics</li>
+    </ul>
+    <li>Example: Using standardized test scores as a proxy for aptitude may disadvantage groups with less access to test preparation resources.</li>
+</ul>
+<h2>Aggregation Bias</h2>
+<ul>
+    <li>Definition: Bias arising from combining distinct populations that may have different relationships between features and outcomes.
+    <li>Indicators:<ul>
+        <li> One-size-fits-all models for heterogeneous populations</li>
+        <li>Features with different predictive relationships across groups</li>
+        <li> Unexplained performance disparities across subgroups</li>
+    </ul>
+    <li>Example: A credit scoring model might not account for different cultural approaches to credit usage, creating disparities across ethnic groups.</li>
+</ul>
+<h2>Learning Bias</h2>
+<ul>
+    <li>Definition: Bias arising from modeling choices that amplify or create disparities.</li>
+    <li>Indicators:<ul>
+        <li>Algorithms that overfit majority patterns</li>
+        <li>Regularization approaches that penalize minority patterns</li>
+        <li>Optimization objectives misaligned with fairness goals</li>
+    </ul>
+    <li>Example: A complex model might learn spurious correlations between protected attributes and outcomes that don't represent causal relationships.</li>
+</ul>
+<h2>Evaluation Bias</h2>
+<ul>
+    <li> Definition: Bias arising from testing procedures that don't represent real-world performance or fairness.</li>
+    <li> Indicators:<ul>
+        <li>Test datasets with different characteristics than deployment contexts</li>
+        <li>Metrics that don't capture relevant fairness dimensions</li>
+        <li>Insufficient disaggregation of performance across groups</li></ul>
+        <li> Example: Evaluating a facial recognition system on a test set that doesn't include diverse skin tones will mask potential performance disparities in deployment.
+</ul>
+<h2>Deployment Bias</h2>
+<ul>
+<li> Definition: Bias arising from how systems are implemented and used in practice.</li>
+<li> Indicators:
+    <ul>
+    <li>Context shifts between training and deployment</li>
+    <li>User interactions that reinforce biases</li>
+    <li>Feedback loops that amplify initial disparities</li></ul>
+    <li>Example: A recommendation system might create filter bubbles that limit exposure diversity based on initial demographic patterns.</li>
+</li>
+</ul>
+<h1>Detecting Bias</h1>
+<h2>Historical </h2>
+    <ul>
+	<li> Using <a href="history.html">historical context assesment tool</a>:
+        <ul>
+	       <li>Extract Documented discrimination patterns from the historical assesment result.</li>
+	       <li> Identify specific historical mechanisms relevant to your application domain.</li>
+	       <li> Reference the historical pattern risk classification to prioritize investigation.</li>
+        </ul>
+    </li>
+    </ul>
+	<ul><li>Quantitative techniques
+        <ul>
+	       <li> Compare outcome distributions across groups identified as high-risk in the Historical Context Assessment. </li>
+	       <li> Analyze correlations between system predictions and historical patterns documented in the assessment. </li>
+	       <li>Test whether current data distributions match historically documented disparities.</li>
+        </ul>
+    </li></ul>
+<h2>Representation </h2>
+	<ul><li> Using <a href="history.html">historical context assesment tool</a>.
+	   
+        <ul>
+            <li>Reference demographic groups identified as historically underrepresented in your domain. </li>
+             <li>Use historical documentation to establish appropriate population benchmarks.</li>
+            <li>Identify measurement approaches that have historically varied across groups.</li>
+        </ul>
+    </li></ul>
+    <ul><li> Quantitaive techniques.
+        <ul>
+            <li>Compare dataset demographics to population benchmarks established from historical context.</li>
+            <li>Analyze missing data patterns for correlation with protected attributes.</li>
+            <li>Assess data quality metrics across demographic groups identified in the historical assessment.</li>
+        </ul>
+    </ul>
+<h2> Measurement </h2>
+    <ul>
+        <li>Using <a href="fairness_definition.html">Fairness Definition Selection Tool</a>:
+            <ul>
+                <li> Reference the selected fairness definitions to identify which measurement biases are most relevant.</li>
+                <li> For individual fairness definitions, focus on detecting inconsistent proxies across similar individuals.</li>
+                <li> For group fairness definitions, prioritize detecting systematic measurement differences across groups.</li>
+            </ul>
+        <li>Quantitative Techniques:
+            <ul>
+                <li> Test proxy variables for differential accuracy across groups based on your selected fairness criteria. </li>
+                <li> Analyze feature distributions to detect encoding schemes that create disparities.</li>
+                <li> Measure label consistency across annotators for different demographic groups.</li>
+            </ul>
+        </li>
+    </ul>
+<h2> Learning </h2>
+    <ul>
+        <li>Using <a href="fairness_definition.html">Fairness Definition Selection Tool</a>:
+            <ul>
+                <li> Analyze model behavior specifically for violations of your selected fairness definitions.</li>
+                <li> For equal opportunity definitions, focus on false negative rate disparities.</li>
+                <li> For demographic parity definitions, examine overall prediction rate differences.</li>
+            </ul>
+        <li> Quantitative Techniques:
+            <ul>
+                <li> Measure model performance across groups according to your selected fairness metrics.</li>
+                <li> Test regularization effects on minority group performance.</li>
+                <li> Analyze model behavior against fairness constraints documented in your definition selection.</li>
+            </ul>
+        </li>
+    </ul>
+<h2> Interesectionality considerations </h2>
+<ul>
+<li>Intentional sampling strategies that ensure adequate representation across demographic intersections, not just primary groups;</li>
+<li>Measurement approaches that are validated across intersectional subgroups to ensure consistent quality;</li>
+<li>Encoding methods that preserve intersectional information rather than flattening to single-attribute categories; and</li>
+<li>Analysis frameworks that explicitly examine bias patterns at demographic intersections rather than treating protected attributes independently.</li>
+</ul>
+
+
+
+</body>
