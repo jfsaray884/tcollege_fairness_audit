@@ -1,0 +1,57 @@
+<html>
+<head>
+    <style>
+        div{
+            color: green;
+            font-size: 50px;
+            margin: 50px 50px;
+        }
+        body {
+                counter-reset: counter1;
+            }
+            h2 {
+                counter-reset: counter2;
+            }
+            h2:before {
+                counter-increment: counter1;
+                content: counter(counter1) ". ";
+            }
+            h3:before {
+                counter-increment: counter2;
+                content: counter(counter1) "." counter(counter2) " ";
+            }
+    </style>
+</head>
+<body>
+<h1>Step 1: Historical Context Assessment</h1>
+<h2>Has <a href="history.html">historical context analysis</a> revealed systematic exclusion or under-representation of protected groups?</h2>
+<ul>
+<li>yes: Include demographic parity as a required fairness definition, then proceed to Step 2</li>
+<li>no: Proceed directly to Step 2.</li>
+</ul>
+
+<h1>Step 2: Error-Impact Analysis</h1>
+<h2>Which error type has greater negative impact in this application?</h2>
+<ul>
+<li>If false negatives (FN) are more harmful: Make equal opportunity a mandatory fairness definition.</li>
+<li>If false positives (FP) are more harmful: Make predictive equality a mandatory fairness definition.</li>
+<li>If both error types are equally critical: Make equalized odds a mandatory fairness definition.</li>
+</ul>
+
+
+
+<h1> Step 3 : Outcome Calibration Assessment</h1>
+<h2> Will the system expose probabilistic scores to users or analysts (e.g., credit-risk scores, insurance pricing, ranking algorithms)?</h2>
+<ul>
+<li>yes: Add sufficiency (group-calibrated scores) to your fairness metric set.</li>
+<li>no: Use the definitions selected in the previous steps.</li>
+</ul>
+
+<h1> Step 4 : intersectionality considerations </h1> 
+<ul>
+<li>Methodological complexity in modeling multiple, interacting protected attributes.</li>
+<li>Statistical challenges with smaller sample sizes at demographic intersections.</li>
+<li> Computational difficulties in analyzing all possible demographic subgroups.</li>
+</ul>
+</body>
+
